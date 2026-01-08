@@ -1,0 +1,5 @@
+1. My profile update functionality: bank account number update must include bank account table update.
+2. Agreement policy
+3. When payment status is changed from pending to completed, the selection criterion must be reservation ids
+
+4. Reservations with uncompleted payment must not appear in the "My Trips" page

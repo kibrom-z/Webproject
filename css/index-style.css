@@ -1,0 +1,14 @@
+#bg-image {
+  background-image: url("../images/bus-background-home.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  min-height: 80vh;
+}
+#welcome {
+  font-size: 3.8rem;
+}
+#fit {
+  width: fit-content;
+  margin: auto;
+}

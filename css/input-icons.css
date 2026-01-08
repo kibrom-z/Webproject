@@ -1,0 +1,98 @@
+#f-name,
+#l-name,
+#username {
+  background-image: url("../images/icons/user_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#e-mail {
+  background-image: url("../images/icons/mail_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#phone {
+  background-image: url("../images/icons/phone_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#bank-acc {
+  background-image: url("../images/icons/bank_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#password,
+#first-password,
+#second-password,
+#old-password,
+#new-password,
+#confirm-password {
+  background-image: url("../images/icons/password_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#board-place,
+#board-place1,
+#board-place2 {
+  background-image: url("../images/icons/bus_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#trip-id {
+  background-image: url("../images/icons/ticket_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#distance {
+  background-image: url("../images/icons/road_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#dep-place {
+  background-image: url("../images/icons/bus_back_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#arv-place {
+  background-image: url("../images/icons/bus_front_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+
+/* For Bank Simulator Pages*/
+#acc-hold,
+#trans-to {
+  background-image: url("../images/icons/user_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#acc-num,
+#acc-num2 {
+  background-image: url("../images/icons/bank_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#bal,
+#amount {
+  background-image: url("../images/icons/bitcoin_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}
+#reason {
+  background-image: url("../images/icons/info_filled_20px.png");
+  background-repeat: no-repeat;
+  background-position: 5px;
+  background-blend-mode: difference;
+}

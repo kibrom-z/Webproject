@@ -1,0 +1,401 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 21, 2022 at 08:44 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `zemen_bus_trs`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bank_accounts`
+--
+
+CREATE TABLE `bank_accounts` (
+  `bank_account_id` mediumint(8) UNSIGNED NOT NULL,
+  `passenger_id` mediumint(8) UNSIGNED NOT NULL,
+  `account_number` varchar(15) NOT NULL,
+  `balance` decimal(10,2) NOT NULL DEFAULT 16393.12
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bank_accounts`
+--
+
+INSERT INTO `bank_accounts` (`bank_account_id`, `passenger_id`, `account_number`, `balance`) VALUES
+(1, 0, '6162', '29015.00'),
+(2, 21, '100002345678', '608.12'),
+(3, 22, '100002436587', '5363.12'),
+(4, 23, '100003456987', '14193.12'),
+(5, 24, '10000193373633', '16393.12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `buses`
+--
+
+CREATE TABLE `buses` (
+  `plate_number` mediumint(8) UNSIGNED NOT NULL,
+  `side_number` smallint(5) UNSIGNED NOT NULL,
+  `carrying_capacity` tinyint(3) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `buses`
+--
+
+INSERT INTO `buses` (`plate_number`, `side_number`, `carrying_capacity`) VALUES
+(12534, 2, 49),
+(24647, 112, 50),
+(96789, 207, 51);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cities`
+--
+
+CREATE TABLE `cities` (
+  `city_id` smallint(5) UNSIGNED NOT NULL,
+  `name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`city_id`, `name`) VALUES
+(1, 'Addis Ababa'),
+(2, 'Arba Minch'),
+(3, 'Axum'),
+(4, 'Mekele'),
+(5, 'Shire'),
+(6, 'Bahir Dar'),
+(7, 'Gondar'),
+(8, 'Wollo'),
+(9, 'Kombolcha'),
+(10, 'Hawassa'),
+(11, 'Wolaita'),
+(12, 'Welkitie'),
+(13, 'Jinka'),
+(14, 'Semera'),
+(15, 'Asosa'),
+(16, 'Dire Dawa'),
+(17, 'Harar'),
+(18, 'Bonga'),
+(19, 'Jimma'),
+(20, 'Welega'),
+(21, 'Asela'),
+(22, 'Jijiga');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `refund_requests`
+--
+
+CREATE TABLE `refund_requests` (
+  `refund_request_id` mediumint(8) UNSIGNED NOT NULL,
+  `reason` varchar(20) NOT NULL,
+  `issued_date` datetime NOT NULL,
+  `passenger_id` mediumint(8) UNSIGNED NOT NULL,
+  `reservation_id` mediumint(8) UNSIGNED NOT NULL,
+  `refund_amount` double NOT NULL,
+  `refund_status` varchar(10) NOT NULL DEFAULT 'pending',
+  `finance_officer_id` mediumint(8) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `refund_requests`
+--
+
+INSERT INTO `refund_requests` (`refund_request_id`, `reason`, `issued_date`, `passenger_id`, `reservation_id`, `refund_amount`, `refund_status`, `finance_officer_id`) VALUES
+(20, 'trip cancel', '2024-04-05 02:53:08', 21, 135, 600, 'processed', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `report_id` mediumint(8) UNSIGNED NOT NULL,
+  `route_id` mediumint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '0 means all routes',
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `generated_on` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`report_id`, `route_id`, `start_date`, `end_date`, `generated_on`) VALUES
+(9, 0, '2024-06-05', '2024-06-06', '2024-06-10 08:36:49'),
+(10, 42, '2024-06-09', '2024-06-13', '2024-06-12 08:38:22'),
+(12, 0, '2024-06-09', '2024-06-23', '2024-06-14 09:31:57'),
+(13, 43, '2024-06-09', '2024-06-13', '2024-06-16 10:43:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservations`
+--
+
+CREATE TABLE `reservations` (
+  `reservation_id` mediumint(8) UNSIGNED NOT NULL,
+  `accessibility` varchar(12) NOT NULL DEFAULT 'accessible',
+  `passenger_id` mediumint(8) UNSIGNED NOT NULL,
+  `first_name` varchar(20) NOT NULL,
+  `last_name` varchar(20) NOT NULL,
+  `sex` varchar(6) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `phone` varchar(10) NOT NULL,
+  `boarding_place` varchar(20) NOT NULL,
+  `trip_id` mediumint(8) UNSIGNED NOT NULL,
+  `issued_date` datetime NOT NULL,
+  `seat_number` tinyint(3) UNSIGNED NOT NULL,
+  `payment_status` varchar(10) NOT NULL,
+  `passenger_has_attended` varchar(3) NOT NULL DEFAULT 'No'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservations`
+--
+
+INSERT INTO `reservations` (`reservation_id`, `accessibility`, `passenger_id`, `first_name`, `last_name`, `sex`, `email`, `phone`, `boarding_place`, `trip_id`, `issued_date`, `seat_number`, `payment_status`, `passenger_has_attended`) VALUES
+(135, 'inaccessible', 21, 'Zaid', 'Mengstu', 'Female', 'zaid@gmail.com', '0976543046', '', 28, '2024-12-06 14:02:44', 1, 'completed', 'No'),
+(136, 'accessible', 21, 'Behafta', 'Berihu', 'Female', 'behafta@gmail.com', '0912317463', '', 28, '2024-12-06 14:03:04', 2, 'completed', 'No'),
+(137, 'accessible', 21, 'Filmon', 'Hayelom', 'Male', 'filmon@gmail.com', '0958633845', 'University gate', 28, '2024-06-09 02:35:58', 29, 'completed', 'No'),
+(138, 'accessible', 21, 'Kibrom', 'Zebrehe', 'Male', 'kib@gmail.com', '0948136383', '', 28, '2024-06-09 02:40:49', 3, 'completed', 'No'),
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `routes`
+--
+
+CREATE TABLE `routes` (
+  `route_id` smallint(5) UNSIGNED NOT NULL,
+  `departure_place` varchar(30) NOT NULL,
+  `arrival_place` varchar(30) NOT NULL,
+  `distance_in_km` double NOT NULL,
+  `tariff` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `routes`
+--
+
+INSERT INTO `routes` (`route_id`, `departure_place`, `arrival_place`, `distance_in_km`, `tariff`) VALUES
+(40, 'Addis Ababa', 'Arba Minch', 505, 600),
+(41, 'Arba Minch', 'Addis Ababa', 505, 600),
+(42, 'Addis Ababa', 'Bonga', 389, 600),
+(43, 'Bonga', 'Addis Ababa', 389, 600),
+(44, 'Addis Ababa', 'Jimma', 259, 430),
+(45, 'Jimma', 'Addis Ababa', 259, 430),
+(46, 'Addis Ababa', 'Gondar', 612, 600),
+(47, 'Gondar', 'Addis Ababa', 612, 600),
+(48, 'Addis Ababa', 'Asela', 473, 440),
+(49, 'Asela', 'Addis Ababa', 473, 440),
+(50, 'Arba Minch', 'Wolaita', 120, 100),
+(51, 'Wolaita', 'Arba Minch', 120, 100);
+(52, 'Addis Ababa', 'Mekele', 700, 1200),
+(53, 'Mekele', 'Addis Ababa', 700, 1200),
+(54, 'Addis Ababa', 'Shire', 800, 1400),
+(55, 'Shire', 'Addis Ababa', 700, 1400),
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trips`
+--
+
+CREATE TABLE `trips` (
+  `trip_id` mediumint(8) UNSIGNED NOT NULL,
+  `departure_date` date NOT NULL,
+  `departure_time` time NOT NULL,
+  `route_id` smallint(6) UNSIGNED NOT NULL,
+  `tariff` double NOT NULL,
+  `bus_plate_number` mediumint(8) UNSIGNED NOT NULL,
+  `bookings` tinyint(3) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `trips`
+--
+
+INSERT INTO `trips` (`trip_id`, `departure_date`, `departure_time`, `route_id`, `tariff`, `bus_plate_number`, `bookings`) VALUES
+(27, '2024-06-03', '23:00:00', 43, 600, 12534, 1),
+(28, '2024-06-04', '21:00:00', 42, 600, 24647, 3),
+(30, '2024-06-10', '00:00:00', 50, 100, 24647, 2),
+(33, '2024-06-8', '23:30:00', 44, 430, 12534, 0),
+(34, '2024-06-17', '22:00:00', 45, 430, 12534, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` mediumint(8) UNSIGNED NOT NULL,
+  `first_name` varchar(20) NOT NULL,
+  `last_name` varchar(20) NOT NULL,
+  `sex` varchar(6) NOT NULL,
+  `phone` varchar(10) NOT NULL,
+  `email` varchar(40) NOT NULL,
+  `username` varchar(15) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `account_type` varchar(20) NOT NULL,
+  `account_status` varchar(8) NOT NULL DEFAULT 'Active',
+  `bank_acc_number` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `sex`, `phone`, `email`, `username`, `password`, `account_type`, `account_status`, `bank_acc_number`) VALUES
+(3, 'Behafta', 'Berihu', 'Female', '0987652121', 'behafta@gmail.com', 'behafta_cs', '$2y$10$xCztYwONb95R8oml2q095u6W.4pjB/w1wMjcRtZG6LtEEaTiYffjW', 'Bus Attendant', 'Active', ''),
+(4, 'Zaid', 'Mengstu', 'Female', '0953443423', 'zaid@gmail.com', 'zaid_cs', '$2y$10$xZgQJS85jwtk3xL1djv.OePZ37YFgfxt9gK4KtJlM8tQkOP6pljle', 'Dispatcher', 'Active', ''),
+(5, 'Filmon', 'Hayelom', 'Male', '0976187426', 'futsum@gmail.com', 'futsum_cs', '$2y$10$XuusJ86cAFXb31G8N.ltme/g2XygJBa4HIcDhElFMPqgjhTDbhiVK', 'Finance Officer', 'Active', ''),
+(6, 'Futsum', 'Buruh', 'Male', '0970945671', 'futsum@gmail.com', 'futsum_cs', '$2y$10$AHThG52cGnuFUeKRTq.9Cu.fvMoa1lbrlhMMB97Z3PY7xxbeFamMC', 'Manager', 'Active', ''),
+(7, 'Kibrom', 'Zebrehe', 'Male', '0972138134', 'kibromzeb@gmail.com', 'kib_cs', '$2y$10$60B8IYmqkz2klKM4T9iKIulIcnDItYST0BpoNwCVnx5bs4SJg4m8y', 'System Administrator', 'Active', ''),
+(21, 'Dawit', 'Gere', 'Male', '0942543567', 'dawit@gmail.com', 'dev_cs', '$2y$10$ZCetGKHY0qolFJ9cH0HJ9e0S6w.JgHedEgoW2/dSqRAa7rhg26YoK', 'Passenger', 'Active', '100002345678'),
+(22, 'Abel', 'Kebede', 'Male', '0115527713', 'abel@gmail.com', 'abel_cs', '$2y$10$0mARv6rHa92EVX7K2O1d0uETDXi0vb6mrJyxi6BmU1izS4E6yFPXy', 'Passenger', 'Active', '100002436587'),
+
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bank_accounts`
+--
+ALTER TABLE `bank_accounts`
+  ADD PRIMARY KEY (`bank_account_id`);
+
+--
+-- Indexes for table `buses`
+--
+ALTER TABLE `buses`
+  ADD PRIMARY KEY (`plate_number`);
+
+--
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`name`),
+  ADD UNIQUE KEY `city_id` (`city_id`);
+
+--
+-- Indexes for table `refund_requests`
+--
+ALTER TABLE `refund_requests`
+  ADD PRIMARY KEY (`refund_request_id`);
+
+--
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`report_id`);
+
+--
+-- Indexes for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD PRIMARY KEY (`reservation_id`);
+
+--
+-- Indexes for table `routes`
+--
+ALTER TABLE `routes`
+  ADD PRIMARY KEY (`route_id`);
+
+--
+-- Indexes for table `trips`
+--
+ALTER TABLE `trips`
+  ADD PRIMARY KEY (`trip_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bank_accounts`
+--
+ALTER TABLE `bank_accounts`
+  MODIFY `bank_account_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `city_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `refund_requests`
+--
+ALTER TABLE `refund_requests`
+  MODIFY `refund_request_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `report_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `reservations`
+--
+ALTER TABLE `reservations`
+  MODIFY `reservation_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+
+--
+-- AUTO_INCREMENT for table `routes`
+--
+ALTER TABLE `routes`
+  MODIFY `route_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `trips`
+--
+ALTER TABLE `trips`
+  MODIFY `trip_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
