@@ -59,13 +59,11 @@ if (!isset($_SESSION['account_type']) or ($_SESSION['account_type'] != "Passenge
             <p class="company-name">zemen express cooperate</p>
         </section>
         <section>
-            <p class="footer-title">Developers</p>
+            <p class="footer-title">Developed By </p>
             <ol>
-                <li>Behafta Berihu</li>
-                <li>Futsum Buruh</li>
+              
                 <li>Kibrom Zebrehe</li>
-                <li>Zaid Mengstu</li>
-                <li>Filmon Hayelom</li>
+
             </ol>
         </section>
         <section>
