@@ -86,13 +86,11 @@ if (!isset($_SESSION['account_type']) or ($_SESSION['account_type'] != "Manager"
             <p class="fs-5 fw-bold">ZEMEN EXPRESS COOPERATE</p>
           </div>
           <div class="col-lg m-3">
-            <p class="mb-3 fs-5 fw-bold text-light">Developers</p>
+            <p class="mb-3 fs-5 fw-bold text-light">Developed By </p>
             <ol>
-                <li>Behafta Berihu</li>
-                <li>Futsum Buruh</li>
+              
                 <li>Kibrom Zebrehe</li>
-                <li>Zaid Mengstu</li>
-                <li>Filmon Hayelom</li>
+
             </ol>
           </div>
           <div class="col-lg m-3">
